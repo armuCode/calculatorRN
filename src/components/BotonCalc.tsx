@@ -1,15 +1,22 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-interface PropsBoton {
+import {Text, TouchableOpacity, View} from 'react-native';
+import {styles} from '../theme/appTheme';
+
+interface Props {
   texto: string;
   color?: string;
   ancho?: boolean;
+  accion: (numeroTexto: string) => void;
 }
-const BotonCalc = ({texto, color = '#2d2d2d', ancho = false}: PropsBoton) => {
+
+export const BotonCalc = ({
+  texto,
+  color = '#2D2D2D',
+  ancho = false,
+  accion,
+}: Props) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => accion(texto)}>
       <View
         style={{
           ...styles.boton,
@@ -19,7 +26,7 @@ const BotonCalc = ({texto, color = '#2d2d2d', ancho = false}: PropsBoton) => {
         <Text
           style={{
             ...styles.botonTexto,
-            color: color === '#9b9b9b' ? 'black' : 'white',
+            color: color === '#9B9B9B' ? 'black' : 'white',
           }}>
           {texto}
         </Text>
@@ -27,23 +34,3 @@ const BotonCalc = ({texto, color = '#2d2d2d', ancho = false}: PropsBoton) => {
     </TouchableOpacity>
   );
 };
-
-export default BotonCalc;
-
-const styles = StyleSheet.create({
-  boton: {
-    height: 80,
-    width: 80,
-    backgroundColor: '#2d2d2d',
-    borderRadius: 100,
-    justifyContent: 'center',
-    marginHorizontal: 10,
-  },
-  botonTexto: {
-    textAlign: 'center',
-    padding: 10,
-    fontSize: 30,
-    color: 'white',
-    fontWeight: '300',
-  },
-});
